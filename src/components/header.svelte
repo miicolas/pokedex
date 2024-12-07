@@ -20,7 +20,7 @@
 	<nav class="flex gap-10">
 		{#each navData as { name, url }}
 			<a href={url} class="text-gray-950 text-lg flex flex-col"
-			aria-current={$page.url.pathname === url ? 'page' : undefined}>
+			aria-current={$page.url.pathname === url ? 'page' : undefined} data-sveltekit-preload-data>
 				{name}
 				{#if ($page.url.pathname === url)}
 					<div class="h-0.5 w-full bg-gray-950"></div>
