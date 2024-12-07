@@ -1,15 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { twMerge } from 'tailwind-merge';
 
 	export let styleType: 'primary' | 'secondary' | 'danger' = '';
 	export let disabled: boolean = false;
 	export let customClass: string | null = '';
 	export let redirect: string | null = null;
-
-	console.log(customClass);
-	console.log(redirect);
-	console.log(disabled);
-	console.log(styleType);
 
 	const style = [
 		{
@@ -27,7 +23,6 @@
 	];
 
 	const computedStyle = style.find(s => s.nameType === styleType)?.class;
-	console.log(computedStyle);
 
 	function goTo() {
 		if (redirect) {
@@ -38,7 +33,7 @@
 
 <button
 	{...$$restProps}
-	class={` ${computedStyle} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${customClass ? customClass : ''}`}
+	class={twMerge(`${computedStyle} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${customClass ? customClass : ''}`)}
 	disabled={disabled}
 	on:click={() => redirect && goTo()}
 >

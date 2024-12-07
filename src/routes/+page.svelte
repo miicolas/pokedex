@@ -3,7 +3,7 @@
 
 </script>
 
-<div class="grid grid-cols-12 gap-4 bg-yellow-500 px-20 items-center min-h-[75vh] h-fit">
+<div class="grid grid-col-1 lg:grid-cols-12 gap-4 bg-yellow-500 px-20 py-10 lg:py-0  justify-center items-center min-h-[75vh] h-fit">
 	<div class="flex-col flex gap-16 col-span-5">
 		<h1 class="text-5xl font-bold text-gray-950">
 			<span class="font-bold">Find</span> all your favorite <span class="font-bold">Pokemon</span>
@@ -15,7 +15,6 @@
 		<Button
 			styleType='primary'
 			redirect='/pokedex'
-			customClass=""
 		>
 			See more Pokemons
 		</Button>
