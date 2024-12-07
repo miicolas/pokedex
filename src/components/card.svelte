@@ -31,7 +31,7 @@
 
 <a href={`/pokedex/${name}`}>
 	<div class="flex gap-2 border-gray-200 border w-fit rounded-lg">
-		<div class="p-2 flex flex-col justify-between items-center">
+		<div class="p-2 flex flex-col justify-between items-center w-32">
 			<h2 class="text-gray-950 font-bold">
 				{name}
 			</h2>
