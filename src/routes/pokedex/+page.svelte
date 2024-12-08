@@ -1,38 +1,56 @@
 <script lang="ts">
 	import Card from '../../components/card.svelte';
 	import Pagination from '../../components/pagination.svelte';
-	import { onMount } from 'svelte';
 
-	export let data;
-	const { pokemons, total, limit, page } = data;
+	interface Pokemon {
+		name: string;
+		types: { type: { name: string } }[];
+		stats: { base_stat: number }[];
+		url: string;
+	}
 
-	let currentPage = 0; // Page actuelle
-	let search: string = '';
-	let filterByType: string = 'all';
-	let filteredPokemons = pokemons;
+	interface Data {
+		pokemons: Pokemon[];
+		total: number;
+		limit: number;
+		page: number;
+	}
 
-	// Filtrer les Pokémons
-	const searchPokemon = (searchTerm: string) => {
-		return pokemons.filter(pokemon =>
+	const { data }: { data: Data } = $props();
+
+	const pokemonsData: Pokemon[] = data.pokemons;
+
+	let currentPage = 0;
+	let search: string = $state('');
+	let filterByType: string = $state('all');
+	let filteredPokemons: Pokemon[] = $state(pokemonsData || []);
+	let paginatedPokemons: Pokemon[] = $state([]);
+
+	const searchPokemon = (searchTerm: string): Pokemon[] => {
+		return pokemonsData.filter(pokemon =>
 			pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
 			pokemon.types.some(type => type.type.name.toLowerCase().includes(searchTerm.toLowerCase()))
 		);
 	};
 
-	// Liste des types uniques
-	const getUniqueTypes = () => {
+	const getUniqueTypes = (): string[] => {
 		const types = new Set<string>();
-		pokemons.forEach(pokemon => {
-			pokemon.types.forEach(type => types.add(type.type.name));
-		});
+		if (pokemonsData) {
+			pokemonsData.forEach(pokemon => {
+				pokemon.types.forEach(type => types.add(type.type.name));
+			});
+		}
 		return Array.from(types);
 	};
 
-	// Appliquer les filtres et la pagination
-	$: filteredPokemons = searchPokemon(search)
-		.filter(pokemon => filterByType === 'all' || pokemon.types.some(type => type.type.name === filterByType));
+	$effect(() => {
+		filteredPokemons = searchPokemon(search)
+			.filter(pokemon => filterByType === 'all' || pokemon.types.some(type => type.type.name === filterByType));
+	});
 
-	$: paginatedPokemons = filteredPokemons.slice(currentPage * limit, (currentPage + 1) * limit); // Pagination des Pokémons filtrés par recherche et type sélectionné
+	$effect(() => {
+		paginatedPokemons = filteredPokemons.slice(currentPage * data.limit, (currentPage + 1) * data.limit);
+	});
 
 </script>
 
@@ -55,7 +73,7 @@
 		</select>
 	</div>
 
-	{#if filteredPokemons.length === 0}
+	{#if filteredPokemons && filteredPokemons.length === 0}
 		<p class="text-2xl text-gray-950 text-center">No Pokemons found</p>
 	{:else}
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -71,13 +89,12 @@
 		</div>
 	{/if}
 
-	<!-- Pagination -->
 	<Pagination
-		totalItems={total}
-		itemsPerPage={limit}
-		currentPage={page}
+		totalItems={data.total}
+		itemsPerPage={data.limit}
+		currentPage={data.page}
 		on:changePage={(e) => {
-				window.location.search = `?page=${e.detail}`;
-			}}
+    window.location.search = `?page=${e.detail}`;
+   }}
 	/>
 </main>
