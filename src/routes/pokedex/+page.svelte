@@ -54,7 +54,7 @@
 
 </script>
 
-<main class="w-full flex flex-col p-20 gap-10">
+<main class="w-full flex flex-col p-20 gap-10 mx-auto">
 	<div class="flex items-start gap-4">
 		<input
 			type="search"
@@ -76,7 +76,7 @@
 	{#if filteredPokemons && filteredPokemons.length === 0}
 		<p class="text-2xl text-gray-950 text-center">No Pokemons found</p>
 	{:else}
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
 			{#each paginatedPokemons as pokemon (pokemon.name)}
 				<Card
 					name={pokemon.name}
