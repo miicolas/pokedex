@@ -1,26 +1,36 @@
 <script lang="ts">
-	export let totalItems = 0;
-	export let itemsPerPage = 9;
-	export let currentPage = 0;
 
-	$: totalPages = Math.ceil(totalItems / itemsPerPage);
+	let { totalItems, itemsPerPage, currentPage, inflate, deflate } = $props();
 
-	const goToPage = (page: number) => {
-		if (page >= 0 && page < totalPages) {
-			dispatch('changePage', page);
+	let totalPages = $state(0);
+
+	$effect(() => {
+		totalPages = Math.ceil(totalItems / itemsPerPage);
+	});
+
+
+	const goToPage = (page: number, direction: 'next' | 'prev') => {
+		if (page >= 0 && page < totalPages && direction === 'next') {
+			currentPage = page;
+			inflate(currentPage);
+		}
+		else {
+			currentPage = page;
+			deflate(currentPage);
+
 		}
 	};
 
-	import { createEventDispatcher } from 'svelte';
-	const dispatch = createEventDispatcher();
 </script>
 
 {#if totalItems > itemsPerPage}
 	<div class="flex justify-between items-center gap-2 text-sm">
 		<button
-			on:click={() => goToPage(currentPage - 1)}
+			onclick={() => goToPage(currentPage - 1, 'prev')}
 			disabled={currentPage === 0}
 			aria-label="Left arrow icon"
+			class="px-4 py-2 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400 transition duration-200"
+
 		>
 			Précédent
 		</button>
@@ -28,9 +38,10 @@
 		<p>{currentPage } / {totalPages}</p>
 
 		<button
-			on:click={() => goToPage(currentPage + 1)}
+			onclick={() => goToPage(currentPage + 1, 'next')}
 			disabled={currentPage === totalPages - 1}
 			aria-label="Right arrow icon"
+			class="px-4 py-2 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400 transition duration-200"
 		>
 			Suivant
 		</button>

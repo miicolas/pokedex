@@ -16,8 +16,7 @@
 		page: number;
 	}
 
-	const { data }: { data: Data } = $props();
-
+	let { data }: { data: Data } = $props();
 	const pokemonsData: Pokemon[] = data.pokemons;
 
 	let currentPage = 0;
@@ -51,6 +50,7 @@
 	$effect(() => {
 		paginatedPokemons = filteredPokemons.slice(currentPage * data.limit, (currentPage + 1) * data.limit);
 	});
+
 
 </script>
 
@@ -93,8 +93,11 @@
 		totalItems={data.total}
 		itemsPerPage={data.limit}
 		currentPage={data.page}
-		on:changePage={(e) => {
-    window.location.search = `?page=${e.detail}`;
-   }}
+		inflate={(page: Data['page']) => {
+        window.location.search = `?page=${page}`;
+    }}
+		deflate={(page: Data['page']) => {
+        window.location.search = `?page=${page}`;
+    }}
 	/>
 </main>
