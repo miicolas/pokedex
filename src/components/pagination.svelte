@@ -24,7 +24,7 @@
 </script>
 
 {#if totalItems > itemsPerPage}
-	<div class="flex justify-between items-center gap-2 text-sm">
+	<div class="flex items-center gap-10 text-sm mx-auto">
 		<button
 			onclick={() => goToPage(currentPage - 1, 'prev')}
 			disabled={currentPage === 0}
