@@ -23,7 +23,7 @@
 			aria-current={$page.url.pathname === url ? 'page' : undefined} data-sveltekit-preload-data>
 				{name}
 				{#if ($page.url.pathname === url)}
-					<div class="h-0.5 w-full bg-gray-950"></div>
+					<div class="h-1 w-6 bg-yellow-800 rounded-full mx-auto"></div>
 				{/if}
 			</a>
 		{/each}
