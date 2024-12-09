@@ -1,11 +1,8 @@
-<script lang="ts" module>
+<script lang="ts">
 	import { goto } from '$app/navigation';
 	import { twMerge } from 'tailwind-merge';
 
-	export let styleType: 'primary' | 'secondary' | 'danger' = '';
-	export let disabled: boolean = false;
-	export let customClass: string | null = '';
-	export let redirect: string | null = null;
+	const { styleType, disabled, customClass, redirect } = $$props;
 
 	const style = [
 		{
