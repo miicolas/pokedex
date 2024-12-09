@@ -107,25 +107,23 @@
 
 <a
 	href={`/pokedex/${name}`}
-	class="block transition-transform hover:scale-105 duration-300"
+	class="block transition-transform hover:scale-105 duration-300 w-fit "
 >
-	<div class="relative flex bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-		<!-- Info Section -->
+	<div class="relative flex w-fit bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+
 		<div class="p-4 flex flex-col justify-between min-w-[140px]">
 			<div class="space-y-3">
-				<!-- Name -->
+
 				<h2 class="text-lg font-bold text-gray-900 truncate">
 					{name}
 				</h2>
 
-				<!-- Type Badge -->
 				<div class={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium ${currentType.text} ${currentType.bg} ${currentType.border} border`}>
 					<span>{currentType.icon}</span>
 					<span class="capitalize">{type}</span>
 				</div>
 			</div>
 
-			<!-- Stats -->
 			<div class="flex gap-2 mt-4">
 				<div class="flex flex-col items-center">
 					<div class={`w-12 h-12 rounded-full border-2 ${currentType.border} flex items-center justify-center bg-white`}>
@@ -142,7 +140,6 @@
 			</div>
 		</div>
 
-		<!-- Image Section -->
 		<div class={`relative w-48 ${currentType.bg} flex items-center justify-center p-4`}>
 			<div class="absolute inset-0 opacity-50 bg-gradient-to-br from-white/80"> </div>
 			<img
