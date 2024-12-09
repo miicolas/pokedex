@@ -44,30 +44,22 @@
 
 					<div class="flex gap-4">
 						<Button
-							styleType="fire"
+							styleType="primary"
 							redirect="/pokedex"
-							size="lg"
 						>
 							Voir le Pokédex
 						</Button>
 
-						<Button
-							styleType="water"
-							redirect="/types"
-							size="lg"
-						>
-							Explorer les Types
-						</Button>
+
 					</div>
 				</div>
 
-				<!-- Image Pokémon -->
+
 				<div class="col-span-1 lg:col-span-7 flex justify-center items-center relative">
 					<div class="relative w-96 h-96">
-						<!-- Cercle décoratif -->
-						<div class="absolute inset-0 bg-white/10 rounded-full backdrop-blur-sm transform -translate-y-6 scale-90" />
 
-						<!-- Image du Pokémon -->
+						<div class="absolute inset-0 bg-white/10 rounded-full backdrop-blur-sm transform -translate-y-6 scale-90"> </div>
+
 						<img
 							src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${featuredPokemon[currentPokemonIndex]}.png`}
 							alt="Featured Pokemon"
@@ -81,7 +73,6 @@
 						/>
 					</div>
 
-					<!-- Indicateurs de rotation -->
 					<div class="absolute bottom-0 flex gap-2">
 						{#each featuredPokemon as _, index}
 							<button
