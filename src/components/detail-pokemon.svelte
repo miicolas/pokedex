@@ -1,13 +1,11 @@
 <script lang="ts">
 
-	type Data = {
+	interface Data {
 		typeDetail: string;
 		detail: string;
 	}
 
-
-	const { typeDetail, detail }:Data  = $$props;
-
+	const { typeDetail, detail }: Data = $props();
 
 </script>
 

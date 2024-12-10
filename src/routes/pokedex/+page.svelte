@@ -51,7 +51,6 @@
 		paginatedPokemons = filteredPokemons.slice(currentPage * data.limit, (currentPage + 1) * data.limit);
 	});
 
-
 </script>
 
 <main class="w-full flex flex-col p-20 gap-10 mx-auto">
