@@ -15,9 +15,9 @@
 		limit: number;
 		page: number;
 	}
-
 	let { data }: { data: Data } = $props();
-	const pokemonsData: Pokemon[] = data.pokemons;
+
+	const pokemonsData: Pokemon[] = data.pokemons || [];
 
 	let currentPage = 0;
 	let search: string = $state('');
@@ -89,9 +89,9 @@
 	{/if}
 
 	<Pagination
-		totalItems={data.total}
-		itemsPerPage={data.limit}
-		currentPage={data.page}
+		totalItems={data.total }
+		itemsPerPage={data.limit || 9}
+		currentPage={data.page || 1}
 		inflate={(page: Data['page']) => {
         window.location.search = `?page=${page}`;
     }}

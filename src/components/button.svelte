@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { twMerge } from 'tailwind-merge';
 
-	const { styleType, disabled, customClass, redirect } = $$props;
+	const { styleType, disabled, customClass, redirect, children, ...rest} = $props();
 
 	const style = [
 		{
@@ -21,7 +21,7 @@
 
 	const computedStyle = style.find(s => s.nameType === styleType)?.class;
 
-	function goTo() {
+	const goTo = () => {
 		if (redirect) {
 			goto(redirect);
 		}
@@ -29,10 +29,10 @@
 </script>
 
 <button
-	{...$$restProps}
+	{...rest}
 	class={twMerge(`${computedStyle} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${customClass ? customClass : ''}`)}
 	disabled={disabled}
-	on:click={() => redirect && goTo()}
+	onclick={() => redirect && goTo()}
 >
-	<slot />
+	{@render children?.()}
 </button>
