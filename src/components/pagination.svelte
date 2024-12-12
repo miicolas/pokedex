@@ -18,8 +18,12 @@
 			currentPage = page;
 			deflate(currentPage);
 
+
+
 		}
 	};
+
+	
 
 </script>
 

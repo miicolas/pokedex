@@ -1,10 +1,8 @@
 export async function load({ url }) {
 	const limit = 9;
-	let page = Number(url.searchParams.get('page')) || 1;
+	const page = Number(url.searchParams.get('page')) || 1;
 
 	const offset = (page - 1 ) * limit;
-
-
 
 	const fetchPokemons = async (offset: number, limit: number) => {
 		const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`);
@@ -14,7 +12,6 @@ export async function load({ url }) {
 		const data = await response.json();
 		return data.results;
 	};
-
 
 	const pokemons = await fetchPokemons(offset, limit);
 
